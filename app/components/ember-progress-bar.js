@@ -1,0 +1,1 @@
+export { default } from 'ember-progress-bar/components/ember-progress-bar';
