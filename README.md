@@ -1,26 +1,42 @@
-# Ember-progress-bar
+[![npm version](https://badge.fury.io/js/ember-progress-bar.svg)](https://badge.fury.io/js/ember-progress-bar)
+[![Build Status](https://travis-ci.org/null-null-null/ember-progress-bar.svg?branch=master)](https://travis-ci.org/null-null-null/ember-progress-bar)
 
-This README outlines the details of collaborating on this Ember addon.
+# ember-progress-bar
+
+Wraps the versatile [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) in an Ember.js component.
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+`ember install ember-progress-bar`
 
-## Running
+## Usage
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+`{{ember-progress-bar}}`
 
-## Running Tests
+### `shape`
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+By default, `ember-progress-bar` renders a `Line` progress bar, but ProgressBar.js provides several other shapes, as well as an api for custom options. You can specify these with the `shape` attribute:
 
-## Building
+`{{ember-progress-bar shape="Circle"}}`
 
-* `ember build`
+`{{ember-progress-bar shape="SemiCircle"}}`
 
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+`{{ember-progress-bar shape="Path"}}`
+
+### `progress`
+
+A float between 0 and 1, with 1 being progress complete:
+
+`{{ember-progress-bar progress=progress}}`
+
+### `useDefaultStep`
+
+A boolean, defaulting to `false`. If `true`, the component will render a number between 0 and 100, tracking the progress of the bar:
+
+`{{ember-progress-bar useDefaultStep=true}}`
+
+### `options`
+
+A hash of options, which are fed directly to ProgressBar.js. Consult their [api](http://progressbarjs.readthedocs.io/en/latest/api/shape/#new-shapecontainer-options) for more info.
+
+`{{ember-progress-bar options=(hash strokeWidth=10 duration=1000)}}`

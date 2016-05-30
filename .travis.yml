@@ -1,35 +1,35 @@
----
 language: node_js
 node_js:
-  - "0.12"
-
+- '0.12'
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 env:
-  - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-1.13
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
-
+- EMBER_TRY_SCENARIO=default
+- EMBER_TRY_SCENARIO=ember-1.13
+- EMBER_TRY_SCENARIO=ember-release
+- EMBER_TRY_SCENARIO=ember-beta
+- EMBER_TRY_SCENARIO=ember-canary
 matrix:
   fast_finish: true
   allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
-
+  - env: EMBER_TRY_SCENARIO=ember-canary
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
-  - "npm config set spin false"
-  - "npm install -g npm@^2"
-
+- export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+- npm config set spin false
+- npm install -g npm@^2
 install:
-  - npm install -g bower
-  - npm install
-  - bower install
-
+- npm install -g bower
+- npm install
+- bower install
 script:
-  - ember try $EMBER_TRY_SCENARIO test
+- ember try $EMBER_TRY_SCENARIO test
+deploy:
+  provider: npm
+  email: null@ember.theater
+  api_key:
+    secure: 2C7V5/zCHB1II19M9fXxYjmAhaZtH/VJcvL0FUm5N8PGtjSmNsfqU00kjjfmcOcUJiD0mXX+beHUPP+hsfoCf6lBY9YmbJd8dQNS6z6Os53GBHn3SlSSCnwPu7gluE6jh2U6lKwgw5ydv0AM7ol+SYzVywBJSCvzbbphAnB5aWNIozlUvyS7OhOrLCZruobm+/JApZrHpgxMmJv5lXUPkmZoegROOTnRK6gYraz+owqboUpbqnovAmdsXrQbLhdoDFElbSAL2fvl3Pjkb5TbCLSjvpOnvnaqObum3Q7jvcFFQG0SLSEsUlErQNTeUBO2+t0B4Gru/IxBOP1f0ua6cLCW+l3FQxsKP38IkSg8uusZ4sqt3qpirFMcQSGTISvv+GEIdGhzuTkFnp2Mcq4b6SnELTnGtlJx4/PFbkVFeXuVb4FsdnffXyFLByVfW1cLBGgOd6ahl2vyS5Vud/xjyJBfD7cYaQdZ2/vdl7sWELOVj3aZ4aBfVEWazmx7+MFS2YE9rF0KIg4IHfXw14Pf7qDwDZICoDEveJwmAELbPcTNJN0LjD9TEiQnX7JCKklhJVp9b/CO+7X9hqW1GMhNDGCmojmRY/SRAkz7qjkCAJ04Ow9aQyfw0RMrclffZ4YOUwSKNnmjfm95URRp/uRtr3tYPkXRmrmVmbBGA2EAUN8=
+  on:
+    tags: true
+    repo: null-null-null/ember-progress-bar
