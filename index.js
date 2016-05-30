@@ -25,7 +25,7 @@ module.exports = {
 
     app = getParentApp(app);
 
-    app.import(`vendor/progressbar.js/dist/progressbar.min.js`);
+    app.import('vendor/progressbar.js/dist/progressbar.min.js');
   },
 
   safeIncluded: function(app, parent) {
