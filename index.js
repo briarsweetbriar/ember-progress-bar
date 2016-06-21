@@ -1,6 +1,7 @@
 /* jshint node: true */
 'use strict';
 
+var path = require('path');
 var Funnel = require('broccoli-funnel')
 
 function getParentApp(app) {
@@ -15,7 +16,8 @@ module.exports = {
   name: 'ember-progress-bar',
 
   treeForVendor: function() {
-    return new Funnel('node_modules/progressbar.js', {
+    var treePath = path.dirname(require.resolve('progressbar.js')).split('/').slice(0, -1).join('/');
+    return new Funnel(treePath, {
       destDir: 'progressbar.js'
     });
   },
