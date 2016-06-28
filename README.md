@@ -40,3 +40,7 @@ A boolean, defaulting to `false`. If `true`, the component will render a number 
 A hash of options, which are fed directly to ProgressBar.js. Consult their [api](http://progressbarjs.readthedocs.io/en/latest/api/shape/#new-shapecontainer-options) for more info.
 
 `{{ember-progress-bar options=(hash strokeWidth=10 duration=1000)}}`
+
+### `onAnimationComplete`
+
+An action which will be fired at animation end ( fired by [animated callback](http://progressbarjs.readthedocs.io/en/latest/api/path/#animateprogress-options-cb) ) to handle animation process.

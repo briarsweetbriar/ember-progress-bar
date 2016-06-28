@@ -9,6 +9,7 @@ const {
 export default Component.extend({
   classNames: ['ember-progress-bar'],
   hook: 'ember_progress_bar',
+  onAnimationComplete: null,
 
   shape: 'Line',
   options: { },
@@ -37,7 +38,7 @@ export default Component.extend({
 
     const progress = get(this, 'progress');
 
-    get(this, 'progressBar').animate(progress);
+    get(this, 'progressBar').animate(progress, () => this.sendAction('onAnimationComplete'));
   },
 
   willDestroyElement(...args) {
