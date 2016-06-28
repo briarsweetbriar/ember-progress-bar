@@ -79,3 +79,19 @@ test('it updates with progress', function(assert) {
     done();
   }, 400);
 });
+
+test('it fire action on animation end', function(assert) {
+  assert.expect(2);
+  const done = assert.async();
+  let counter = 0;
+
+  this.set('externalAction', () => counter++);
+
+  this.render(hbs`{{ember-progress-bar useDefaultStep=true progress=0.0123456 onAnimationComplete=(action externalAction)}}`);
+  assert.equal(counter, 0, 'External action should not be called on render');
+
+  later(() => {
+    assert.equal(counter, 1, 'External action should be called');
+    done();
+  }, 1000);
+});
