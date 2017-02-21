@@ -2,9 +2,21 @@ import Ember from 'ember';
 
 const {
   Component,
+  assign,
   get,
-  set
+  set,
+  typeOf
 } = Ember;
+
+function deepObjectAssign(object) {
+  Object.keys(object).forEach((key) => {
+    if (typeOf(object[key]) === 'object') {
+      object[key] = deepObjectAssign(object[key]);
+    }
+  });
+
+  return assign({}, object);
+}
 
 export default Component.extend({
   classNames: ['ember-progress-bar'],
@@ -22,10 +34,10 @@ export default Component.extend({
     this._super(...args);
 
     const shape = get(this, 'shape');
-    const options = get(this, 'options');
+    const options = deepObjectAssign(get(this, 'options'));
 
     if (get(this, 'useDefaultStep')) {
-      options.step = get(this, 'defaultStep');
+      set(options, 'step', get(this, 'defaultStep'));
     }
 
     const progressBar = new ProgressBar[shape](this.element, options);
