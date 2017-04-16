@@ -20,7 +20,7 @@ module.exports = {
   name: 'ember-progress-bar',
 
   treeForVendor: function() {
-    var treePath = path.dirname(require.resolve('progressbar.js')).split('/').slice(0, -1).join('/');
+    var treePath = path.join(path.dirname(require.resolve('progressbar.js')), '/..')
     return new Funnel(treePath, {
       destDir: 'progressbar.js'
     });
