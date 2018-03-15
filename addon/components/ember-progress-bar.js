@@ -5,7 +5,9 @@ const {
   assign,
   get,
   set,
-  typeOf
+  typeOf,
+  getProperties,
+  isPresent
 } = Ember;
 
 function deepObjectAssign(object) {
@@ -25,6 +27,8 @@ export default Component.extend({
 
   shape: 'Line',
   options: { },
+
+  setProgress: null,
 
   defaultStep(state, bar) {
     bar.setText((bar.value() * 100).toFixed(0));
@@ -48,9 +52,18 @@ export default Component.extend({
   didRender(...args) {
     this._super(...args);
 
-    const progress = get(this, 'progress');
+    const { progressBar, progress, setProgress } = getProperties(
+      this,
+      'progressBar',
+      'progress',
+      'setProgress'
+    );
 
-    get(this, 'progressBar').animate(progress, () => this.sendAction('onAnimationComplete'));
+    if (isPresent(setProgress)) {
+      progressBar.set(setProgress);
+    }
+
+    progressBar.animate(progress, () => this.sendAction('onAnimationComplete'));
   },
 
   willDestroyElement(...args) {
