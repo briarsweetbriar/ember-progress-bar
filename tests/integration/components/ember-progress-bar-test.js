@@ -63,6 +63,26 @@ test('when useDefaultStep is true, it displays progress text', function(assert) 
   }, 1000);
 });
 
+
+test('when setProgress is set, the bar starts with that progress', function(assert) {
+  assert.expect(2);
+
+  const done = assert.async();
+
+  this.set('setProgress', 0.5);
+  this.set('progress', 0.8);
+
+  this.render(hbs`{{ember-progress-bar progress=progress setProgress=setProgress}}`);
+
+  assert.equal(Ember.$(`${hook('ember_progress_bar')} path`).css('stroke-dashoffset'), '50px', 'initial progress correct');
+
+  later(() => {
+    assert.equal(Ember.$(`${hook('ember_progress_bar')} path`).css('stroke-dashoffset'), '20px', 'progress proceeds correctly');
+    
+    done();
+  }, 1000);
+});
+
 test('it updates with progress', function(assert) {
   assert.expect(3);
 
