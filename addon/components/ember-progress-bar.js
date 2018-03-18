@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { assign } from '@ember/polyfills';
-import { set, get } from '@ember/object';
-import { typeOf } from '@ember/utils';
+import { set, get, getProperties } from '@ember/object';
+import { isPresent, typeOf } from '@ember/utils';
 
 function deepObjectAssign(object) {
   Object.keys(object).forEach((key) => {
@@ -19,6 +19,8 @@ export default Component.extend({
   onAnimationComplete: null,
 
   shape: 'Line',
+
+  setProgress: null,
 
   defaultStep(state, bar) {
     bar.setText((bar.value() * 100).toFixed(0));
@@ -42,7 +44,16 @@ export default Component.extend({
   didRender(...args) {
     this._super(...args);
 
-    const progress = get(this, 'progress');
+    const { progressBar, progress, setProgress } = getProperties(
+      this,
+      'progressBar',
+      'progress',
+      'setProgress'
+    );
+
+    if (isPresent(setProgress)) {
+      progressBar.set(setProgress);
+    }
 
     get(this, 'progressBar').animate(progress, () => {
       if (this.get('onAnimationComplete')) this.get('onAnimationComplete')();

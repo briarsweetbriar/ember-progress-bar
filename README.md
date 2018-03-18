@@ -29,6 +29,12 @@ A float between 0 and 1, with 1 being progress complete:
 
 `{{ember-progress-bar progress=progress}}`
 
+### `setProgress`
+
+The initial progress that the bar will render with.
+
+`{{ember-progress-bar setProgress=0.5}}`
+
 ### `useDefaultStep`
 
 A boolean, defaulting to `false`. If `true`, the component will render a number between 0 and 100, tracking the progress of the bar:
