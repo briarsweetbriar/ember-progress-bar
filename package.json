@@ -1,6 +1,6 @@
 {
   "name": "ember-progress-bar",
-  "version": "0.0.8beta",
+  "version": "1.0.0",
   "description": "An Ember.js wrapper and component for ProgressBar.js.",
   "keywords": [
     "ember-addon"
