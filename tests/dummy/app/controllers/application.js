@@ -1,12 +1,12 @@
-import Ember from 'ember';
-
-const { Controller } = Ember;
-const { run: { later } } = Ember;
+import { later } from '@ember/runloop';
+import Controller from '@ember/controller';
 
 export default Controller.extend({
   progress: 0,
 
   init() {
+    this._super(...arguments);
+
     this.step();
   },
 
